@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildPro - Premium Building Materials & Hardware</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a2332;
+            --accent: #ff6b35;
+            --accent-light: #ffa500;
+            --text-light: #ffffff;
+            --bg-dark: #0f1419;
+            --bg-light: #f5f7fa;
+            --border: #2d3e52;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .admin-link {
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .admin-link:hover {
+            background: var(--accent-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1f2d3d 100%);
+            color: var(--text-light);
+            padding: 6rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .authorized {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .secondary-button {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .secondary-button:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .category-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), #2d3e52);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            flex: 1;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .product-actions button {
+            flex: 1;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .quote-btn {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .quote-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
+            color: var(--text-light);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-actions button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .cancel-btn {
+            background: var(--bg-light);
+            color: var(--primary);
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: #999;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">BuildPro</div>
+        <ul class="nav-links">
+            <li><a onclick="scrollToSection('products')">Products</a></li>
+            <li><a onclick="scrollToSection('contact')">Contact</a></li>
+        </ul>
+        <a href="/admin" class="admin-link">Admin</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="authorized">⭐ Authorised Dealer ⭐</div>
+            <h1>Everything You Need to Build Your Dream Home</h1>
+            <p class="tagline">Premium cement, hardware, materials, and expert solutions</p>
+            <div class="hero-buttons">
+                <a onclick="scrollToSection('products')" class="cta-button">Explore Products</a>
+                <a onclick="scrollToSection('contact')" class="cta-button secondary-button">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="section-header">
+            <h2>Our Products</h2>
+            <div class="category-filter" id="categoryFilter"></div>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2>Get in Touch</h2>
+        <p>Ready to get started? Contact us for quotes and more information.</p>
+        <div class="contact-info" id="contactInfo"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 BuildPro. All rights reserved.</p>
+        <p>Building trust, one project at a time.</p>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h3>Contact Us About This Product</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="message" placeholder="Tell us more about your requirements..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Send on WhatsApp</button>
+                    <button type="button" class="cancel-btn" onclick="closeModal('contactModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quote Modal -->
+    <div class="modal" id="quoteModal">
+        <div class="modal-content">
+            <h3>Request a Quote</h3>
+            <form id="quoteForm">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="quoteName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="quoteEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="quotePhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Additional Details</label>
+                    <textarea id="quoteMessage" placeholder="Any specific requirements or questions?"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Submit Quote Request</button>
+                    <button type="button" class="cancel-btn" onclick="closeModal('quoteModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+        let categories = [];
+        let settings = {};
+        let selectedProductId = null;
+
+        // Initialize
+        async function init() {
+            await loadSettings();
+            await loadProducts();
+            await loadCategories();
+            displayContactInfo();
+        }
+
+        async function loadSettings() {
+            try {
+                const response = await fetch('/api/settings');
+                settings = await response.json();
+            } catch (error) {
+                console.error('Error loading settings:', error);
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                products = await response.json();
+                displayProducts(products);
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                categories = await response.json();
+                displayCategoryFilters();
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        function displayCategoryFilters() {
+            const filterContainer = document.getElementById('categoryFilter');
+            
+            const allBtn = document.createElement('button');
+            allBtn.className = 'category-btn active';
+            allBtn.textContent = 'All Products';
+            allBtn.onclick = () => filterByCategory('All', allBtn);
+            filterContainer.appendChild(allBtn);
+
+            const uniqueCategories = [...new Set(products.map(p => p.category))];
+            uniqueCategories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn';
+                btn.textContent = cat;
+                btn.onclick = () => filterByCategory(cat, btn);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function filterByCategory(category, button) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+
+            if (category === 'All') {
+                displayProducts(products);
+            } else {
+                displayProducts(products.filter(p => p.category === category));
+            }
+        }
+
+        function displayProducts(productsToShow) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            productsToShow.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                const imageHtml = product.image_path 
+                    ? `<img src="${product.image_path}" alt="${product.name}">`
+                    : `<span>📦</span>`;
+
+                card.innerHTML = `
+                    <div class="product-image">${imageHtml}</div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.description || ''}</p>
+                        ${product.price ? `<div class="product-price">₹${product.price.toLocaleString()}</div>` : ''}
+                        <div class="product-actions">
+                            <button class="contact-btn" onclick="openContactModal(${product.id}, '${product.name}')">
+                                📱 Contact Us
+                            </button>
+                            <button class="quote-btn" onclick="openQuoteModal(${product.id}, '${product.name}')">
+                                📋 Quote
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function displayContactInfo() {
+            const contactContainer = document.getElementById('contactInfo');
+            contactContainer.innerHTML = `
+                <div class="contact-item">
+                    <strong>📍 Location</strong>
+                    ${settings.address || 'Your City, Your Area'}
+                </div>
+                <div class="contact-item">
+                    <strong>📞 Call</strong>
+                    <a href="tel:${settings.phone}" style="color: inherit; text-decoration: none;">
+                        ${settings.phone || '+91 XXXXX XXXXX'}
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <strong>📧 Email</strong>
+                    <a href="mailto:${settings.email}" style="color: inherit; text-decoration: none;">
+                        ${settings.email || 'contact@buildpro.in'}
+                    </a>
+                </div>
+            `;
+        }
+
+        function openContactModal(productId, productName) {
+            selectedProductId = productId;
+            document.getElementById('contactModal').classList.add('active');
+            document.getElementById('contactForm').dataset.productName = productName;
+        }
+
+        function openQuoteModal(productId, productName) {
+            selectedProductId = productId;
+            document.getElementById('quoteModal').classList.add('active');
+            document.getElementById('quoteForm').dataset.productName = productName;
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const phone = document.getElementById('customerPhone').value;
+            const message = document.getElementById('message').value;
+            const productName = e.target.dataset.productName;
+
+            // Save to database
+            await fetch('/api/inquiries', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customer_name: name,
+                    customer_email: email,
+                    customer_phone: phone,
+                    product_id: selectedProductId,
+                    product_name: productName,
+                    quantity: 1,
+                    message: message
+                })
+            });
+
+            // Send WhatsApp message
+            const whatsappNumber = settings.whatsapp_number?.replace(/\D/g, '') || '';
+            const whatsappMessage = `Hello! I'm interested in ${productName}. ${message}. Please contact me at ${phone}.`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+
+            closeModal('contactModal');
+            document.getElementById('contactForm').reset();
+            alert('Your message has been saved and WhatsApp will open!');
+        });
+
+        document.getElementById('quoteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('quoteName').value;
+            const email = document.getElementById('quoteEmail').value;
+            const phone = document.getElementById('quotePhone').value;
+            const quantity = document.getElementById('quantity').value;
+            const message = document.getElementById('quoteMessage').value;
+            const productName = e.target.dataset.productName;
+
+            await fetch('/api/inquiries', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customer_name: name,
+                    customer_email: email,
+                    customer_phone: phone,
+                    product_id: selectedProductId,
+                    product_name: productName,
+                    quantity: quantity,
+                    message: message
+                })
+            });
+
+            closeModal('quoteModal');
+            document.getElementById('quoteForm').reset();
+            alert('Quote request submitted! We will contact you soon.');
+        });
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
